@@ -64,6 +64,15 @@ def select_with_condition():
     return result
 
 
+def update_value():
+    connection = sqlite3.connect('cinema.db')
+    connection.execute("""
+    UPDATE "Seat" SET "taken"=1 WHERE "seat_id"="A3"
+    """)
+    connection.commit()
+    connection.close()
+
+
 print(f'{"select_all":>25} | ', select_all())
 print(f'{"select_specific_columns":>25} | ', select_specific_columns())
 print(f'{"select_with_condition":>25} | ', select_with_condition())
