@@ -64,11 +64,11 @@ def select_with_condition():
     return result
 
 
-def update_value():
+def update_value(occupied, seat_id):
     connection = sqlite3.connect('cinema.db')
     connection.execute("""
-    UPDATE "Seat" SET "taken"=1 WHERE "seat_id"="A3"
-    """)
+    UPDATE "Seat" SET "taken"=? WHERE "seat_id"=?
+    """, [occupied, seat_id])
     connection.commit()
     connection.close()
 
@@ -76,7 +76,7 @@ def update_value():
 def delete_record():
     connection = sqlite3.connect('cinema.db')
     connection.execute("""
-    DELET FROM "Seat" WHERE "seat_id"="A3"
+    DELETE FROM "Seat" WHERE "seat_id"="A3"
     """)
     connection.commit()
     connection.close()
@@ -86,5 +86,6 @@ print(f'{"select_all":>25} | ', select_all())
 print(f'{"select_specific_columns":>25} | ', select_specific_columns())
 print(f'{"select_with_condition":>25} | ', select_with_condition())
 
-update_value()
+update_value(1, "A2")
 delete_record()
+print(f'{"select_all":>25} | ', select_all())
