@@ -25,9 +25,45 @@ def create_table():
 def insert_record():
     connection = sqlite3.connect('cinema.db')
     connection.execute("""
-    INSERT INTO "Seat" ("seat_id", "taken", "price") VALUES ("A1", "0", "90"), ("A2", "1", "100"), ("A3", "0", "80")
+    INSERT INTO "Seat" ("seat_id", "taken", "price") VALUES ("A1", 0, 90), ("A2", "1", "100"), ("A3", "0", "80")
     """)
     connection.commit()
     connection.close()
 
-insert_record()
+
+def select_all():
+    connection = sqlite3.connect('cinema.db')
+    cursor = connection.cursor()
+    cursor.execute("""
+    SELECT * FROM "Seat"
+    """)
+    result = cursor.fetchall()
+    connection.close()
+    return result
+
+
+def select_specific_columns():
+    connection = sqlite3.connect('cinema.db')
+    cursor = connection.cursor()
+    cursor.execute("""
+    SELECT "seat_id", "price" FROM "Seat"
+    """)
+    result = cursor.fetchall()
+    connection.close()
+    return result
+
+
+def select_with_condition():
+    connection = sqlite3.connect('cinema.db')
+    cursor = connection.cursor()
+    cursor.execute("""
+    SELECT "seat_id", "price" FROM "Seat" WHERE "price" > 80
+    """)
+    result = cursor.fetchall()
+    connection.close()
+    return result
+
+
+print(f'{"select_all":>25} | ', select_all())
+print(f'{"select_specific_columns":>25} | ', select_specific_columns())
+print(f'{"select_with_condition":>25} | ', select_with_condition())
