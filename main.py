@@ -73,6 +73,18 @@ def update_value():
     connection.close()
 
 
+def delete_record():
+    connection = sqlite3.connect('cinema.db')
+    connection.execute("""
+    DELET FROM "Seat" WHERE "seat_id"="A3"
+    """)
+    connection.commit()
+    connection.close()
+
+
 print(f'{"select_all":>25} | ', select_all())
 print(f'{"select_specific_columns":>25} | ', select_specific_columns())
 print(f'{"select_with_condition":>25} | ', select_with_condition())
+
+update_value()
+delete_record()
