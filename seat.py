@@ -1,3 +1,6 @@
+import sqlite3
+
+
 class Seat:
 
     database = 'cinema.db'
@@ -9,7 +12,20 @@ class Seat:
         pass
 
     def is_free(self):
-        pass
+        connection = sqlite3.connect(self.database)
+        cursor = connection.cursor()
+        cursor.execute("""
+        SELECT "taken" from "Seat" WHERE "seat_id" = ?
+        """, [self.seat_id])
+        result = cursor.fetchall()
+        free = result[0][0]
+
+        return True if free == 0 else False
 
     def occupy(self):
         pass
+
+
+if __name__ == '__main__':
+    seat = Seat('A1')
+    print(seat.is_free())
