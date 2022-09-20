@@ -1,30 +1,22 @@
 import sqlite3
+from classes.db import DB
 
 
 class Seat:
 
-    database = 'data/cinema.db'
+    database = '../data/cinema.db'
 
     def __init__(self, seat_id):
         self.seat_id = seat_id
+        self.db = DB(self.database)
 
     def get_price(self):
-        connection = sqlite3.connect(self.database)
-        cursor = connection.cursor()
-        cursor.execute("""
-        SELECT "price" from "Seat" WHERE "seat_id" = ?
-        """, [self.seat_id])
-        result = cursor.fetchall()
+        result = self.db.select('SELECT "price" from "Seat" WHERE "seat_id" = ?', self.seat_id)
         price = result[0][0]
         return price
 
     def is_free(self):
-        connection = sqlite3.connect(self.database)
-        cursor = connection.cursor()
-        cursor.execute("""
-        SELECT "taken" from "Seat" WHERE "seat_id" = ?
-        """, [self.seat_id])
-        result = cursor.fetchall()
+        result = self.db.select('SELECT "taken" from "Seat" WHERE "seat_id" = ?', self.seat_id)
         free = result[0][0]
 
         return True if free == 0 else False
