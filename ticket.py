@@ -36,15 +36,22 @@ class Ticket:
         pdf.set_font(family='Times', style='B', size=14)
         pdf.cell(w=100, h=25, txt='Price : ', border=1)
         pdf.set_font(family='Times', style='', size=12)
-        pdf.cell(w=0, h=25, txt=self.price, border=1, ln=1)
+        pdf.cell(w=0, h=25, txt=str(self.price), border=1, ln=1)
         pdf.cell(w=0, h=5, txt="", border=1, ln=1)
 
         pdf.set_font(family='Times', style='B', size=14)
         pdf.cell(w=100, h=25, txt='Seat Number: ', border=1)
         pdf.set_font(family='Times', style='', size=12)
-        pdf.cell(w=0, h=25, txt=self.seat_number, border=1, ln=1)
+        pdf.cell(w=0, h=25, txt=str(self.seat_number), border=1, ln=1)
         pdf.cell(w=0, h=5, txt="", border=1, ln=1)
 
         pdf.output('sample.pdf', dest='F')
 
+
+if __name__ == '__main__':
+    from user import User
+
+    user = User('testuser')
+    ticket = Ticket(user, 120.0, 'A1')
+    ticket.to_pdf()
 
