@@ -3,7 +3,7 @@ import sqlite3
 
 class Card:
 
-    database = 'banking.db'
+    database = 'data/banking.db'
 
     def __init__(self, type, number, cvc, holder):
         self.type = type

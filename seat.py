@@ -3,7 +3,7 @@ import sqlite3
 
 class Seat:
 
-    database = 'cinema.db'
+    database = 'data/cinema.db'
 
     def __init__(self, seat_id):
         self.seat_id = seat_id
