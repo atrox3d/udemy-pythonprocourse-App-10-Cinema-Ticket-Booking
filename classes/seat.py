@@ -23,16 +23,12 @@ class Seat:
 
     def occupy(self):
         if self.is_free():
-            connection = sqlite3.connect(self.database)
-            cursor = connection.cursor()
-            connection.execute("""
-            UPDATE "Seat" SET "taken" = ? WHERE "seat_id" = ?
-            """, [1, self.seat_id])
-            connection.commit()
-            connection.close()
+            self.db.update('UPDATE "Seat" SET "taken" = ? WHERE "seat_id" = ?', 1, self.seat_id)
 
 
 if __name__ == '__main__':
     seat = Seat('A1')
     print(seat.is_free())
     print(seat.get_price())
+    print(seat.occupy())
+    print(seat.is_free())

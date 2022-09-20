@@ -9,6 +9,14 @@ class DB:
     def select(self, query, *params):
         connection = sqlite3.connect(self.path)
         cursor = connection.cursor()
-        # print(f'DB.select | query: {query} | params: {params}')
         cursor.execute(query, params)
-        return cursor.fetchall()
+        result = cursor.fetchall()
+        connection.close()
+        return result
+
+    def update(self, query, *params):
+        connection = sqlite3.connect(self.path)
+        connection.execute(query, params)
+        connection.commit()
+        connection.close()
+
