@@ -1,4 +1,3 @@
-import sqlite3
 from classes.db import DB
 
 
