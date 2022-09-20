@@ -30,7 +30,15 @@ class Seat:
         return True if free == 0 else False
 
     def occupy(self):
-        pass
+        if self.is_free():
+            connection = sqlite3.connect(self.database)
+            cursor = connection.cursor()
+            connection.execute("""
+            UPDATE "Seat" SET "taken" = ? WHERE "seat_id" = ?
+            """, [1, self.seat_id])
+            connection.commit()
+            connection.close()
+
 
 
 if __name__ == '__main__':
