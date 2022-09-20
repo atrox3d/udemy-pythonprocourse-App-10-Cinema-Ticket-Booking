@@ -1,6 +1,6 @@
-from seat import Seat
-from card import Card
-from ticket import Ticket
+from classes.seat import Seat
+from classes.card import Card
+from classes.ticket import Ticket
 
 
 class User:

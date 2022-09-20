@@ -1,7 +1,6 @@
-from user import User
-from seat import Seat
-from card import Card
-from ticket import Ticket
+from classes.user import User
+from classes.seat import Seat
+from classes.card import Card
 
 username = input('your full name: ')
 seat_id = input('preferred seat number: ')

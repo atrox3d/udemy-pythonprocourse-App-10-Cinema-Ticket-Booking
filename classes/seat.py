@@ -40,7 +40,6 @@ class Seat:
             connection.close()
 
 
-
 if __name__ == '__main__':
     seat = Seat('A1')
     print(seat.is_free())
